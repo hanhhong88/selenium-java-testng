@@ -126,7 +126,7 @@ public class Topic_03_Xpath {
 		driver.findElement(By.id("txtPassword")).sendKeys("1234567891");
 		driver.findElement(By.id("txtCPassword")).sendKeys("1234567891");
 		driver.findElement(By.id("txtPhone")).sendKeys("09875");
-		
+		//click button "DANG KY"
 		driver.findElement(By.xpath("//form[@id='frmLogin']//button[text()='ĐĂNG KÝ']")).click();
 		//Assert 1 - Assert error message with expected result
 		Assert.assertEquals(driver.findElement(By.id("txtPhone-error")).getText(), "Số điện thoại phải từ 10-11 số.");
