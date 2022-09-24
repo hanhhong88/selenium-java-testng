@@ -146,6 +146,6 @@ public class Topic_03_Xpath {
 	
 	@AfterClass
 	public void afterClass() {
-		//driver.quit();
+		driver.quit();
 	}
 }
