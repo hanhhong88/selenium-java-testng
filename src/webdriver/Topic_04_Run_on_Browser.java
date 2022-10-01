@@ -18,19 +18,19 @@ public class Topic_04_Run_on_Browser {
 	public void TC_01_Run_On_Chrome() {
 		if(osName.contains("Windows")) {
 			System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
-		}else {
+		} else {
 			System.setProperty("webdriver.chrome.driver", projectPath + "/browserDrivers/chromedriver");
 		}
 		driver = new ChromeDriver();
 		driver.get("https://demo.nopcommerce.com/");
 		driver.quit();
 	}
-
+	
 	@Test
 	public void TC_02_Run_On_Firefox () {
 		//usingFireFox
 		if(osName.contains("Windows")) {
-			System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 		}else {
 			System.setProperty("webdriver.gecko.driver", projectPath + "/browserDrivers/geckodriver");
 		}
@@ -39,4 +39,5 @@ public class Topic_04_Run_on_Browser {
 		driver.get("https://demo.nopcommerce.com/");
 		driver.quit();
 	}
+	
 }
