@@ -41,7 +41,7 @@ public class Topic_06_Web_Element_Ex {
 		driver.manage().window().maximize();
 	}
 
-	//@Test
+	@Test
 	public void TC_01 () {
 		
 		//open page
@@ -79,7 +79,7 @@ public class Topic_06_Web_Element_Ex {
 		}
 	}
 
-	//@Test
+	@Test
 	public void TC_02_Enable () {
 		//open page
 		driver.get("https://automationfc.github.io/basic-form/index.html");	
@@ -108,7 +108,7 @@ public class Topic_06_Web_Element_Ex {
 		
 	}
 
-	//@Test
+	@Test
 	public void TC_03_Selected () {
 		//open page
 		driver.get("https://automationfc.github.io/basic-form/index.html");
@@ -128,10 +128,8 @@ public class Topic_06_Web_Element_Ex {
 		
 	}
 	
-	
-
 	@Test
-	public void TC_04_MailChims () {
+	public void TC_04_MailChimp () {
 		//open page
 		driver.get("https://login.mailchimp.com/signup/");
 		
