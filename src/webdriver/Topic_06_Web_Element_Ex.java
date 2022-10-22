@@ -21,7 +21,9 @@ public class Topic_06_Web_Element_Ex {
 	By AgeUnder18radio = By.cssSelector("#under_18");
 	By educationTextarea = By.cssSelector("#edu");
 	By nameUser5text = By.xpath("//h5[text()='Name: User5']");
-	By passwordtextbox = By.
+	By passwordtextbox = By.cssSelector("#disable_password");
+	By biographytextarea = By.cssSelector("#bio");
+	By developmentchecbox = By.cssSelector("#development");
 	
 
 	@BeforeClass
@@ -39,7 +41,7 @@ public class Topic_06_Web_Element_Ex {
 		driver.manage().window().maximize();
 	}
 
-	@Test
+	//@Test
 	public void TC_01 () {
 		
 		//open page
@@ -77,17 +79,151 @@ public class Topic_06_Web_Element_Ex {
 		}
 	}
 
-
-	@Test
+	//@Test
 	public void TC_02_Enable () {
+		//open page
+		driver.get("https://automationfc.github.io/basic-form/index.html");	
+		
+		//passwordtextbox is disable
+		if (driver.findElement(passwordtextbox).isEnabled()) {
+			System.out.println("Password is enable");
+		} else {
+			System.out.println("Password is disable");
+		}
+		
+		//Biography textarea is disable
+		if (driver.findElement(biographytextarea).isEnabled()) {
+			System.out.println("Bio textarea is enable");
+		} else {
+			System.out.println("Bio textarea is disable");
+		}
+		
+		//Email textbox is disable
+		if (driver.findElement(emailtextbox).isEnabled()) {
+			System.out.println("Email textbox is enable");
+		} else {
+			System.out.println("Email textbox is disable");
+		}
+		
 		
 	}
+
+	//@Test
+	public void TC_03_Selected () {
+		//open page
+		driver.get("https://automationfc.github.io/basic-form/index.html");
+		
+		//Verify age and development are not selected 
+		Assert.assertFalse(driver.findElement(AgeUnder18radio).isSelected());
+		Assert.assertFalse(driver.findElement(developmentchecbox).isSelected());
+		
+		//Select
+		driver.findElement(AgeUnder18radio).click();
+		driver.findElement(developmentchecbox).click();
+		Sleepinsecond(2);
+		
+		//Verify age and development are selected
+		Assert.assertTrue(driver.findElement(AgeUnder18radio).isSelected());
+		Assert.assertTrue(driver.findElement(developmentchecbox).isSelected());
+		
+	}
+	
+	
 
 	@Test
-	public void TC_03_Selected () {
+	public void TC_04_MailChims () {
+		//open page
+		driver.get("https://login.mailchimp.com/signup/");
+		
+		//Select
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("automationFC1@gmail.com");
+		By passMailChimps = By.id("new_password");
+		
+		driver.findElement(passMailChimps).sendKeys("abc");
+		Sleepinsecond(2);
+		
+		//Verify lowercase
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='lowercase-char completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='uppercase-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='number-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='special-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='8-char not-completed']")).isDisplayed());
+		
+		driver.findElement(passMailChimps).clear();
+		driver.findElement(passMailChimps).sendKeys("ABC");
+		//Verify Uppercase
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='lowercase-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='uppercase-char completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='number-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='special-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='8-char not-completed']")).isDisplayed());
+		
+		driver.findElement(passMailChimps).clear();
+		driver.findElement(passMailChimps).sendKeys("ABC");
+		Sleepinsecond(2);
+		
+		//Verify Uppercase
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='lowercase-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='uppercase-char completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='number-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='special-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='8-char not-completed']")).isDisplayed());
+		
+		driver.findElement(passMailChimps).clear();
+		driver.findElement(passMailChimps).sendKeys("123");
+		Sleepinsecond(2);
+		
+		//Verify numbercase
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='lowercase-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='uppercase-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='number-char completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='special-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='8-char not-completed']")).isDisplayed());
+		
+		driver.findElement(passMailChimps).clear();
+		driver.findElement(passMailChimps).sendKeys("@#$");
+		Sleepinsecond(2);
+		
+		//Verify specialcase
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='lowercase-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='uppercase-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='number-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='special-char completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='8-char not-completed']")).isDisplayed());
+		
+		driver.findElement(passMailChimps).clear();
+		driver.findElement(passMailChimps).sendKeys("12345678");
+		Sleepinsecond(2);
+		
+		//Verify number chars >=8
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='lowercase-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='uppercase-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='number-char completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='special-char not-completed']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//li[@class='8-char completed']")).isDisplayed());
+		
+		driver.findElement(passMailChimps).clear();
+		driver.findElement(passMailChimps).sendKeys("123aBc@#");
+		Sleepinsecond(2);
+		
+		//Verify full cases
+		Assert.assertFalse(driver.findElement(By.xpath("//li[@class='lowercase-char completed']")).isDisplayed());
+		Assert.assertFalse(driver.findElement(By.xpath("//li[@class='uppercase-char completed']")).isDisplayed());
+		Assert.assertFalse(driver.findElement(By.xpath("//li[@class='number-char completed']")).isDisplayed());
+		Assert.assertFalse(driver.findElement(By.xpath("//li[@class='special-char completed']")).isDisplayed());
+		Assert.assertFalse(driver.findElement(By.xpath("//li[@class='8-char completed']")).isDisplayed());
 		
 	}
-
+	
+	public void Sleepinsecond(long Timeinseconds) {
+		try {
+			Thread.sleep(Timeinseconds * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}// 1000ms = 1s
+	
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
