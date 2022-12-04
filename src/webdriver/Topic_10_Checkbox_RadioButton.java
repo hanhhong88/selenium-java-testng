@@ -39,6 +39,10 @@ public class Topic_10_Checkbox_RadioButton {
 		By loginButton = By.cssSelector("button.fhs-btn-login");
 		//Verify login button is disable
 		Assert.assertFalse(driver.findElement(loginButton).isEnabled());
+		
+		//verify background color of login button
+		String loginButtonBackGround = driver.findElement(loginButton).getCssValue("background-color");
+		System.out.println(loginButtonBackGround);
 	}
 
 	//@Test
