@@ -19,7 +19,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class Topic_16_Popup_Part1 {
+public class Topic_16_Popup_Part1_Fixed_InDom {
 	WebDriver driver;
 	WebDriverWait explicitWay;
 	String projectPath = System.getProperty("user.dir");
