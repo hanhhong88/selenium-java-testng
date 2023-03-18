@@ -1,6 +1,8 @@
 package webdriver;
 
 
+import java.io.File;
+import java.sql.Date;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -19,6 +21,14 @@ public class Topic_26_Explicit_Wait_Exercise {
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
 	WebDriverWait explicitWait;
+	
+	String bayMau = "BayMau.jpeg";
+	String LangSon = "Lang Son.jpeg";
+	String QuyNhon = "Quy Nhon.jpeg";
+	
+	String bayMau_path = projectPath + File.separator + "uploadFile" + File.separator + bayMau;
+	String LangSon_path = projectPath + File.separator + "uploadFile" + File.separator + LangSon;
+	String QuyNhon_path = projectPath + File.separator + "uploadFile" + File.separator + QuyNhon;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -36,7 +46,7 @@ public class Topic_26_Explicit_Wait_Exercise {
 		driver.manage().window().maximize();
 	}
 
-	@Test
+//	@Test
 	public void TC_01_Telerick() {
 		driver.get("https://demos.telerik.com/aspnet-ajax/ajaxloadingpanel/functionality/explicit-show-hide/defaultcs.aspx");
 		String text_Today = driver.findElement(By.cssSelector("div#ctl00_ContentPlaceholder1_ctl00_ContentPlaceholder1_Label1Panel")).getText();
@@ -61,7 +71,33 @@ public class Topic_26_Explicit_Wait_Exercise {
 	}
 
 	@Test
-	public void TC_02 () {
+	public void TC_02_UploadFile () {
+		driver.get("https://gofile.io/uploadFiles");
+		
+		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div#mainContent>div>div>div.spiner-border")));
+		
+		By upload = By.cssSelector("div#filesUpload button.filesUploadButton");
+		
+		driver.findElement(upload).sendKeys(bayMau_path + "\n" + LangSon_path + "\n" + QuyNhon_path);
+		
+		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div#mainUploadInitInfo>div>div>div.spiner-border")));
+		
+		explicitWait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.cssSelector("div.progress-bar"))));
+	
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//div[contains(@class, 'mainUploadSuccess')]//div[text() = 'Your files have been successfully uploaded']"))));
+	
+		explicitWait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//div[contains(@class, 'mainUploadSuccessLink')]//a[@class = 'ajaxLink']")))).click();
+	
+		explicitWait.until(ExpectedConditions.visibilityOf(driver.findElement(By.cssSelector("div#filesContentTable"))));
+		
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text() = '" + bayMau + "']/parent::a/parent::div/following-sibling::div//span[text() = 'Download']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text() = '" + LangSon + "']/parent::a/parent::div/following-sibling::div//span[text() = 'Download']")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text() = '" + QuyNhon + "']/parent::a/parent::div/following-sibling::div//span[text() = 'Download']")).isDisplayed());
+	
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text() = '" + bayMau + "']/parent::a/parent::div/following-sibling::div/button[contains(@class, 'filesContentOptionPlay')]")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text() = '" + LangSon + "']/parent::a/parent::div/following-sibling::div/button[contains(@class, 'filesContentOptionPlay')]")).isDisplayed());
+		Assert.assertTrue(driver.findElement(By.xpath("//span[text() = '" + QuyNhon + "']/parent::a/parent::div/following-sibling::div/button[contains(@class, 'filesContentOptionPlay')]")).isDisplayed());
+	
 		
 	}
 
